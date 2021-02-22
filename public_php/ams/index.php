@@ -12,8 +12,8 @@
  */
 
 // load required pages and turn error reporting on/off
-error_reporting( E_ALL );
-ini_set( 'display_errors', 'on' );
+// error_reporting( E_ALL );
+// ini_set( 'display_errors', 'on' );
 
 class SystemExit extends Exception {}
 try {
