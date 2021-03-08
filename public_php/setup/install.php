@@ -28,7 +28,7 @@ require_once('setup/version.php');
 <?php
 
 	$roleService = isset($_POST["roleService"]) && $_POST["roleService"] == "on";
-	$roleSupport = isset($_POST["roleSupport"]) && $_POST["roleSupport"] == "on";
+	$roleSupport = false; // isset($_POST["roleSupport"]) && $_POST["roleSupport"] == "on";
 	$roleDomain = isset($_POST["roleDomain"]) && $_POST["roleDomain"] == "on";
 
 	if (!$roleService && !$roleSupport && !$roleDomain) {
@@ -87,6 +87,7 @@ require_once('setup/version.php');
 		}
 	}
 
+    /*
 	if ($roleService) {
 		// Create NeL database
 		$continue = create_use_database($continue, $con, $_POST["nelDatabase"]);
@@ -99,7 +100,8 @@ require_once('setup/version.php');
 		// Create Ring database
 		$continue = create_use_database($continue, $con, $_POST["domainDatabase"]);
 	}
-
+    */
+    
 	if ($con) {
 		mysqli_close($con);
 		printalert("info", "Disconnected from the Service SQL server");
@@ -192,6 +194,7 @@ require_once('setup/version.php');
 		}
 	}
 
+    /*
 	require_once('database.php');
 
 	if ($roleSupport) {
@@ -205,7 +208,8 @@ require_once('setup/version.php');
 	if ($roleDomain) {
 		$continue = upgrade_domain_databases($continue);
 	}
-
+    */
+    
 	if ($roleService) {
 		// Create the default shard admin user
 		if (!chdir("admin/")) {
@@ -228,6 +232,7 @@ require_once('setup/version.php');
 				$continue = false;
 			}
 		}
+		/*
 		if ($continue) {
 			$adminGroup = 1;
 			$result = tool_admin_users_add($_POST["toolsAdminUsername"], $_POST["toolsAdminPassword"], (string)$adminGroup, (string)1);
@@ -238,6 +243,8 @@ require_once('setup/version.php');
 				$continue = false;
 			}
 		}
+		*/
+		
 		if (!chdir("../")) {
 			printalert("danger", "Cannot change to public PHP root directory");
 			$continue = false;
@@ -417,7 +424,7 @@ require_once('setup/version.php');
 						<div class="form-group">
 							<label for="nelSqlPassword" class="col-sm-3 control-label">SQL Password</label>
 							<div class="col-sm-6">
-								<input type="password" class="form-control" id="nelSqlPassword" name="nelSqlPassword" value="">
+								<input type="password" class="form-control" id="nelSqlPassword" name="nelSqlPassword" value="anishin-mmorpg">
 							</div>
 						</div>
 						<div class="form-group">
@@ -473,7 +480,7 @@ require_once('setup/version.php');
 						<div class="form-group">
 							<label for="amsSqlPassword" class="col-sm-3 control-label">SQL Password</label>
 							<div class="col-sm-6">
-								<input type="password" class="form-control" id="amsSqlPassword" name="amsSqlPassword" value="">
+								<input type="password" class="form-control" id="amsSqlPassword" name="amsSqlPassword" value="anishin-mmorpg">
 							</div>
 						</div>
 						<div class="form-group">
@@ -523,13 +530,13 @@ require_once('setup/version.php');
 						<div class="form-group">
 							<label for="nelDomainName" class="col-sm-3 control-label">Name</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="nelDomainName" name="nelDomainName" value="mini01">
+								<input type="text" class="form-control" id="nelDomainName" name="nelDomainName" value="open">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="domainDatabase" class="col-sm-3 control-label">Database</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="domainDatabase" name="domainDatabase" value="ring_mini01">
+								<input type="text" class="form-control" id="domainDatabase" name="domainDatabase" value="ring_open">
 							</div>
 						</div>
 					</div>
